@@ -1,0 +1,22 @@
+# Object files
+*.o
+
+# Libraries
+*.a
+push_swap
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+*.swp
+.DS_Store
+**/.DS_Store
+
+# testers
+push_swap_tester/
+Push-Swap-Tester/
