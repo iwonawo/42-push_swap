@@ -6,7 +6,7 @@
 /*   By: iwozniak <iwozniak@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:07:50 by iwozniak          #+#    #+#             */
-/*   Updated: 2023/10/28 19:27:20 by iwozniak         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:29:22 by iwozniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	check_rest_for_digits(t_data *data, char **arr_split, int i)
 {
-	int		k;
+	int	k;
 
 	k = 1;
 	while (arr_split[i][k] != '\0')
@@ -22,6 +22,19 @@ static void	check_rest_for_digits(t_data *data, char **arr_split, int i)
 		if (!ft_isdigit(arr_split[i][k]))
 			free_split_and_exit(data, arr_split);
 		k++;
+	}
+}
+
+static void	count_after_zero(t_data *data, char **arr_split, int i)
+{
+	int	k;
+
+	k = 1;
+	while (arr_split[i][k] != '\0')
+	{
+		k++;
+		if (k > 18)
+			free_split_and_exit(data, arr_split);
 	}
 }
 
@@ -41,8 +54,12 @@ long	check_digit_and_convert(t_data *data, char **arr_split, int i)
 		}
 		if (!ft_isdigit(arr_split[i][j]))
 			free_split_and_exit(data, arr_split);
-		if (j > 18)
-			free_split_and_exit(data, arr_split);
+		if (arr_split[i][j] == '0')
+		{
+			if (arr_split[i][j + 1] != '0')
+				count_after_zero(data, arr_split, i);
+			j++;
+		}
 		j++;
 	}
 	number = ft_atoi(arr_split[i]);
